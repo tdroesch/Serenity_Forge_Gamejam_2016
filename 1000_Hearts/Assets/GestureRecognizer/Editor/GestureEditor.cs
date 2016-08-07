@@ -170,14 +170,7 @@ namespace GestureRecognizer
             resizerStyle = new GUIStyle();
             resizerStyle.normal.background = EditorGUIUtility.Load("icons/d_AvatarBlendBackground.png") as Texture2D;
 
-			if (EditorGUIUtility.isProSkin)
-			{
-				skin = EditorGUIUtility.Load("GUISkins/GestureEditorProSkin.guiskin") as GUISkin;
-			}
-			else
-			{
-				skin = EditorGUIUtility.Load("GUISkins/GestureEditorSkin.guiskin") as GUISkin;
-			}
+			LoadSkin();
 
 			newGestureName = "";
             isAddingGesture = false;
@@ -583,5 +576,17 @@ namespace GestureRecognizer
         {
             return point + (additive ? gestureDrawArea.position : -gestureDrawArea.position);
         }
+
+		private void LoadSkin()
+		{
+			if (EditorGUIUtility.isProSkin)
+			{
+				skin = EditorGUIUtility.Load("GUISkins/GestureEditorProSkin.guiskin") as GUISkin;
+			}
+			else
+			{
+				skin = EditorGUIUtility.Load("GUISkins/GestureEditorSkin.guiskin") as GUISkin;
+			}
+		}
     }
 }

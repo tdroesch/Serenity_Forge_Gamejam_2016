@@ -30,7 +30,7 @@ namespace Line2D
 		private MeshFilter meshFilter;
 		private Line2DMeshBuffer lineMeshBuffer;
 
-		void Start () 
+		void Awake () 
 		{
 			Init();
 
@@ -74,11 +74,11 @@ namespace Line2D
 			if (meshRenderer == null) GetMeshRenderer();
 			lineMeshBuffer = new Line2DMeshBuffer(meshFilter);
 
-			if (points == null || points.Count<1)
-			{
-				points.Add(new Line2DPoint(Vector3.up * 1, 1f, Color.grey));
-				points.Add(new Line2DPoint(Vector3.up * 2, 1f, Color.grey));
-			}
+			//if (points == null || points.Count<1)
+			//{
+			//	points.Add(new Line2DPoint(Vector3.up * 1, 1f, Color.grey));
+			//	points.Add(new Line2DPoint(Vector3.up * 2, 1f, Color.grey));
+			//}
 
 			UpdateCompleteLine();
 		}

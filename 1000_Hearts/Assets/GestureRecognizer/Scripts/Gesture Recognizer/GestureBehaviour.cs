@@ -36,6 +36,11 @@ namespace GestureRecognizer
         /// </summary>
         public bool isEnabled = true;
 
+		public void Enable(bool b)
+		{
+			isEnabled = b;
+		}
+
         /// <summary>
         /// Loaded multiStroke library.
         /// </summary>
@@ -257,7 +262,7 @@ namespace GestureRecognizer
 		/// <param name="gesture">Gesture.</param>
 		private void Recognize()
         {
-            if (points.Count > 2)
+            if (points.Count > 2 && !isRecognized)
             {
                 Gesture gesture = CreateGesture();
                 Result result = library.Recognize(gesture);
@@ -300,22 +305,28 @@ namespace GestureRecognizer
 
         public void OnClick(BaseEventData eventData)
         {
-            PointerEventData p = eventData as PointerEventData;
-           
-            if (p.button == PointerEventData.InputButton.Left)
-            {
-                CreateNewStroke(Input.mousePosition);
-            }
-            else if (p.button == PointerEventData.InputButton.Right)
-            {
-                Recognize();
-            }
+			if (isEnabled)
+			{
+				PointerEventData p = eventData as PointerEventData;
+
+				if (p.button == PointerEventData.InputButton.Left)
+				{
+					CreateNewStroke(Input.mousePosition);
+				}
+				else if (p.button == PointerEventData.InputButton.Right)
+				{
+					Recognize();
+				} 
+			}
         }
 
 
         public void OnDrag(BaseEventData eventData)
         {
-            RegisterPoint(Input.mousePosition);
+			if (isEnabled)
+			{
+				RegisterPoint(Input.mousePosition); 
+			}
         }
     }
 }
