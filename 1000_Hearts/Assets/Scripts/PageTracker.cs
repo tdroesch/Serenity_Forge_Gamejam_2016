@@ -6,6 +6,7 @@ public class PageTracker : MonoBehaviour {
 	int pageCount = 0;
 	Page[] pages;
 	public StrokeDrawer strokeDrawer;
+	public BGManager bgManager;
 
 	void OnEnable()
 	{
@@ -15,16 +16,21 @@ public class PageTracker : MonoBehaviour {
 			pages[0].SetActive(true);
 			pages[1].SetActive(false);
 		}
+		strokeDrawer = FindObjectOfType<StrokeDrawer>();
+		bgManager = GetComponent<BGManager>();
 	}
 
 	public void NewPage()
 	{
-		pages[pageCount % 2].Flip();
-		pageCount++;
-		pages[pageCount % 2].SetActive(true);
-		if (pageCount < 1000 && pageCount % 50 == 0)
+		if (!strokeDrawer.isPaused)
 		{
-			//Load new location
+			pages[pageCount % 2].Flip();
+			pageCount++;
+			pages[pageCount % 2].SetActive(true);
+			if (pageCount < 1000 && pageCount % 50 == 0)
+			{
+				bgManager.NextBackground();
+			} 
 		}
 	}
 }

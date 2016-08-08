@@ -7,6 +7,8 @@ public class Page : MonoBehaviour {
 	public Vector3 pageAxis;
 	public float flipAngle;
 	private StrokeDrawer strokeDrawer;
+	private AudioLibrary audioLibrary;
+	public float volume;
 
 	void Awake()
 	{
@@ -15,6 +17,7 @@ public class Page : MonoBehaviour {
 		{
 			Debug.Log("No stroke drawer found.");
 		}
+		audioLibrary = Camera.main.GetComponent<AudioLibrary>();
 	}
 
 	public void Flip()
@@ -26,19 +29,11 @@ public class Page : MonoBehaviour {
 	{
 		if (active)
 		{
-			//gameObject.layer = LayerMask.NameToLayer("Canvas");
 			GetComponent<MeshRenderer>().sortingOrder = 1;
 			strokeDrawer.strokeContainer = transform;
-			//GameObject backing = GameObject.CreatePrimitive(PrimitiveType.Quad);
-			//backing.transform.parent = transform;
-			//backing.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
-			//backing.transform.localPosition = new Vector3();
-			//backing.GetComponent<MeshRenderer>().sortingLayerName ="CanvasBack";
-			//backing.GetComponent<MeshRenderer>().sortingOrder = -1;
 		}
 		else
 		{
-			//gameObject.layer = LayerMask.NameToLayer("BackCanvas");
 			GetComponent<MeshRenderer>().sortingOrder = -1;
 			for (int i = 0; i < transform.childCount; i++)
 			{
@@ -49,6 +44,7 @@ public class Page : MonoBehaviour {
 
 	IEnumerator PageFlip()
 	{
+		strokeDrawer.isPaused = true;
 		Vector3 resetPos = transform.position;
 		Quaternion resetRot = transform.rotation;
 		bool flipped = false;
@@ -62,10 +58,12 @@ public class Page : MonoBehaviour {
 			{
 				flipped = true;
 				SetActive(false);
+				audioLibrary.PlayAudioClip("turnpage", volume);
 			}
 			yield return null;
 		}
 		transform.position = resetPos;
 		transform.rotation = resetRot;
+		strokeDrawer.isPaused = false;
 	}
 }

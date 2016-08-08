@@ -13,6 +13,13 @@ public class StrokeDrawer : MonoBehaviour {
 	public string strokeSound;
 	private AudioLibrary audioLibrary;
 	private float startRotation;
+	public bool usingEraser = false;
+	public bool isPaused {
+		get { return paused; }
+		set { paused = value; }
+	}
+	private bool paused = false;
+	public float volume;
 
 	Line2DRenderer stroke;
 	Transform startSprite;
@@ -95,6 +102,7 @@ public class StrokeDrawer : MonoBehaviour {
 					endSprite.rotation = SpriteRotation(false); 
 				}
 			}
+			StopStroke();
 			stroke = null;
 		}
 	}
@@ -122,6 +130,10 @@ public class StrokeDrawer : MonoBehaviour {
 
 	void PlayStroke()
 	{
-		audioLibrary.PlayAudioClip(strokeSound);
+		audioLibrary.PlayAudioClipLoop(strokeSound, volume);
+	}
+	void StopStroke()
+	{
+		audioLibrary.StopAudioClipLoop(strokeSound);
 	}
 }

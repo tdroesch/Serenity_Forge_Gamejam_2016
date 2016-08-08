@@ -7,6 +7,7 @@ public class HeartTracker : MonoBehaviour {
 
 	int hearts = 0;
 	public Text text;
+	public Narrative narrative;
 
 	void OnEnable()
 	{
@@ -28,7 +29,8 @@ public class HeartTracker : MonoBehaviour {
 		if (r.Score > 0.1f)
 		{
 			hearts++;
-			WriteHearts();
+			narrative.PlayNextNarration(hearts);
+			//WriteHearts();
 		}
 	}
 

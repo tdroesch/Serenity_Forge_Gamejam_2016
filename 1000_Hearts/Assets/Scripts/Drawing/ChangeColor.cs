@@ -11,20 +11,23 @@ public class ChangeColor : MonoBehaviour {
 
 	public void SetColor(string c)
 	{
-		switch (c)
+		if (!sd.usingEraser)
 		{
-			case "red":
-				sd.color = Color.red;
-				break;
-			case "green":
-				sd.color = Color.green;
-				break;
-			case "blue":
-				sd.color = Color.blue;
-				break;
-			default:
-				sd.color = Color.gray;
-				break;
+			switch (c)
+			{
+				case "red":
+					sd.color = Color.red;
+					break;
+				case "green":
+					sd.color = Color.green;
+					break;
+				case "blue":
+					sd.color = Color.blue;
+					break;
+				default:
+					sd.color = Color.gray;
+					break;
+			} 
 		}
 	}
 }

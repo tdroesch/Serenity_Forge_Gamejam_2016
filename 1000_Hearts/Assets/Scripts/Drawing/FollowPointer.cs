@@ -3,9 +3,10 @@ using System.Collections;
 
 public class FollowPointer : MonoBehaviour {
 
+	StrokeDrawer strokeDrawer;
 	// Use this for initialization
 	void Start () {
-	
+		strokeDrawer = GetComponent<StrokeDrawer>();
 	}
 	
 	// Update is called once per frame
@@ -16,15 +17,18 @@ public class FollowPointer : MonoBehaviour {
 			transform.position = hit.point;
 			if (Input.GetMouseButtonDown(0))
 			{
-				GetComponent<StrokeDrawer>().NewStroke();
+				if (!strokeDrawer.isPaused)
+				{
+					strokeDrawer.NewStroke(); 
+				}
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				GetComponent<StrokeDrawer>().EndStroke();
+				strokeDrawer.EndStroke();
 			}
 		} else
 		{
-			GetComponent<StrokeDrawer>().EndStroke();
+			strokeDrawer.EndStroke();
 		}
 	}
 }

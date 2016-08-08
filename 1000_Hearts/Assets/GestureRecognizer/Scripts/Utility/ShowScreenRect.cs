@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class ShowScreenRect : MonoBehaviour {
 
@@ -17,13 +19,14 @@ public class ShowScreenRect : MonoBehaviour {
 
     public void OnGUI() {
         r = rectTransform.GetScreenRect(canvas);
-
-        Handles.BeginGUI();
+#if UNITY_EDITOR
+		Handles.BeginGUI();
         Handles.DrawLine(new Vector3(r.xMin, r.yMin, 0), new Vector3(r.xMax, r.yMin, 0));
         Handles.DrawLine(new Vector3(r.xMax, r.yMin, 0), new Vector3(r.xMax, r.yMax, 0));
         Handles.DrawLine(new Vector3(r.xMax, r.yMax, 0), new Vector3(r.xMin, r.yMax, 0));
         Handles.DrawLine(new Vector3(r.xMin, r.yMax, 0), new Vector3(r.xMin, r.yMin, 0));
 
         Handles.EndGUI();
-    }
+#endif
+	}
 }
