@@ -8,6 +8,8 @@ public class ChangeStroke : MonoBehaviour {
 	public stroketype crayon;
 	public stroketype pastel;
 	public stroketype eraser;
+	public stroketype pencil;
+	public stroketype marker;
 
 	// Use this for initialization
 	void OnEnable()
@@ -37,6 +39,24 @@ public class ChangeStroke : MonoBehaviour {
 				if (sd.color == Color.white) sd.color = Color.red;
 				sd.usingEraser = false;
 				al.PlayAudioClip("selectpastel", pastel.selectVolume);
+				break;
+			case "marker":
+				sd.strokeMaterial = marker.strokeMat;
+				sd.strokeEnd = marker.endSprite;
+				sd.strokeSound = marker.strokeSound;
+				sd.volume = marker.useVolume;
+				if (sd.color == Color.white) sd.color = Color.red;
+				sd.usingEraser = false;
+				al.PlayAudioClip("selectpastel", marker.selectVolume);
+				break;
+			case "pencil":
+				sd.strokeMaterial = pencil.strokeMat;
+				sd.strokeEnd = pencil.endSprite;
+				sd.strokeSound = pencil.strokeSound;
+				sd.volume = pencil.useVolume;
+				if (sd.color == Color.white) sd.color = Color.red;
+				sd.usingEraser = false;
+				al.PlayAudioClip("selectpastel", pencil.selectVolume);
 				break;
 			case "eraser":
 				sd.strokeMaterial = eraser.strokeMat;

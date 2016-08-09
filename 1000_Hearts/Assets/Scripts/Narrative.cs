@@ -8,6 +8,7 @@ public class Narrative : MonoBehaviour {
 	public List<NarrativeElement> narration;
 	int currentElement = 0;
 	public Text textTarget;
+	public Text EndGameText;
 	//public AudioSource audioTarget;
 
 	public void PlayNextNarration(int hearts)
@@ -17,6 +18,11 @@ public class Narrative : MonoBehaviour {
 			textTarget.text = narration[currentElement].textNarration;
 			//audioTarget.PlayOneShot(narration[currentElement].audioNarration);
 			currentElement++;
+			if (currentElement >= narration.Count)
+			{
+				EndGameText.enabled = true;
+				FindObjectOfType<StrokeDrawer>().isPaused = true; 
+			}
 		}
 	}
 

@@ -30,12 +30,12 @@ public class HeartTracker : MonoBehaviour {
 		{
 			hearts++;
 			narrative.PlayNextNarration(hearts);
-			//WriteHearts();
+			WriteHearts();
 		}
 	}
 
 	void WriteHearts()
 	{
-		text.text = hearts.ToString();
+		text.text = "Hearts Remaining: " + (40 - hearts).ToString();
 	}
 }

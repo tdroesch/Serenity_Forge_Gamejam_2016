@@ -27,7 +27,7 @@ public class PageTracker : MonoBehaviour {
 			pages[pageCount % 2].Flip();
 			pageCount++;
 			pages[pageCount % 2].SetActive(true);
-			if (pageCount < 1000 && pageCount % 50 == 0)
+			if (pageCount < 50 && pageCount % 5 == 0)
 			{
 				bgManager.NextBackground();
 			} 
